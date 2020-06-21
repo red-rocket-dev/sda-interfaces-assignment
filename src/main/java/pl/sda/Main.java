@@ -14,6 +14,7 @@ public class Main {
             - klasa Triangle powinna implementować interfejs AbleToCalculateArea
             - zaimplementuj brakującą metodę w klasie Triangle (powinna liczyć pole trójkąta)
             - w metodzie main dopisz odpowiedniego ifa i w nim poproś użytkownika o podanie wysokości i boku trójkąta
+        2.5 Podobna operacje wykonaj dla kola i kwadratu (utworz klase i tak dalej)
         3. Analogicznie do tego jak wyliczane jest pole trojkata chcielibysmy teraz wyliczyć jego obwód:
            - utworz interfejs AbleToCalculatePermimeter z metoda:
                double calculatePerimeter();
@@ -41,6 +42,12 @@ public class Main {
             System.out.println("Podaj szerokosc");
             double w = scanner.nextDouble();
             figure = new Rectangle(w, h);
+        } else if(chosenFigure.equals("trojkat")) {
+            System.out.println("Podaj wysokosc");
+            double h = scanner.nextDouble();
+            System.out.println("Podaj bok");
+            double w = scanner.nextDouble();
+            figure = new Triangle(w, h);
         } else {
             System.out.println("Nie znam tej figury, koniec!");
             return;
