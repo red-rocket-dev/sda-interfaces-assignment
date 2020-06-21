@@ -1,18 +1,27 @@
 package pl.sda;
 
-public class Rectangle implements AbleToCalculateArea {
+import java.math.BigDecimal;
 
-    private double width;
-    private double height;
+public class Rectangle implements Figure {
 
-    public Rectangle(double width, double height) {
+    private BigDecimal width;
+    private BigDecimal height;
+
+    public Rectangle(BigDecimal width, BigDecimal height) {
         this.width = width;
         this.height = height;
     }
 
 
     @Override
-    public double calculateArea() {
-        return width * height;
+    public BigDecimal calculateArea() {
+        return width.multiply(height);
+    }
+
+    @Override
+    public BigDecimal calculatePerimeter() {
+        BigDecimal multiplicandTwo = BigDecimal.valueOf(2);
+        return width.multiply(multiplicandTwo)
+                .add(height.multiply(multiplicandTwo));
     }
 }

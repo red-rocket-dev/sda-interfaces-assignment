@@ -1,5 +1,7 @@
 package pl.sda;
 
+import java.math.BigDecimal;
+
 public interface AbleToCalculateArea {
-    double calculateArea();
+    BigDecimal calculateArea();
 }

@@ -1,16 +1,31 @@
 package pl.sda;
 
-public class Triangle implements AbleToCalculateArea {
-    private double width;
-    private double height;
+import java.math.BigDecimal;
 
-    public Triangle(double width, double height) {
-        this.width = width;
+public class Triangle implements Figure {
+    private BigDecimal base;
+    private BigDecimal cathetus2;
+    private BigDecimal hypotenuse;
+    private BigDecimal height;
+
+    public Triangle(BigDecimal base, BigDecimal cathetus2,
+                    BigDecimal hypotenuse, BigDecimal height) {
+        this.base = base;
+        this.cathetus2 = cathetus2;
+        this.hypotenuse = hypotenuse;
         this.height = height;
     }
 
     @Override
-    public double calculateArea() {
-        return 0.5 * width * height;
+    public BigDecimal calculateArea() {
+        return BigDecimal.valueOf(0.5)
+                .multiply(base)
+                .multiply(height);
+    }
+
+    @Override
+    public BigDecimal calculatePerimeter() {
+        return base.add(cathetus2)
+                .add(hypotenuse);
     }
 }

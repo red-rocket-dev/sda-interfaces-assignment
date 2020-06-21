@@ -1,5 +1,7 @@
 package pl.sda;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Scanner;
 
 public class Main {
@@ -17,7 +19,7 @@ public class Main {
         2.5 Podobna operacje wykonaj dla kola i kwadratu (utworz klase i tak dalej)
         3. Analogicznie do tego jak wyliczane jest pole trojkata chcielibysmy teraz wyliczyć jego obwód:
            - utworz interfejs AbleToCalculatePermimeter z metoda:
-               double calculatePerimeter();
+               BigDecimal calculatePerimeter();
            - utworz interfejs Figure, ktory bedzie implementowal AbleToCalculatePerimeter i AbleToCalculateArea
            - wszystkie klasy figur zamiast implementowac AbleToCalculateArea od teraz powinny implementowac Figure
            - co za tym idzie wszystkie powinny implementowac nowa metode - calculatePerimeter - wyliczający obwód
@@ -34,25 +36,40 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         String chosenFigure = scanner.nextLine();
-        AbleToCalculateArea figure;
+        Figure figure;
 
         if (chosenFigure.equals("prostokat")) {
             System.out.println("Podaj wysokosc");
-            double h = scanner.nextDouble();
+            BigDecimal h = scanner.nextBigDecimal();
             System.out.println("Podaj szerokosc");
-            double w = scanner.nextDouble();
+            BigDecimal w = scanner.nextBigDecimal();
             figure = new Rectangle(w, h);
         } else if(chosenFigure.equals("trojkat")) {
             System.out.println("Podaj wysokosc");
-            double h = scanner.nextDouble();
+            BigDecimal h = scanner.nextBigDecimal();
+            System.out.println("Podaj podstawe");
+            BigDecimal cathetus1 = scanner.nextBigDecimal();
+            System.out.println("Podaj 2 przyprostokatna");
+            BigDecimal cathetus2 = scanner.nextBigDecimal();
+            System.out.println("Podaj przeciwprostkatna");
+            BigDecimal hypotenuse = scanner.nextBigDecimal();
+            figure = new Triangle(cathetus1, cathetus2, hypotenuse, h);
+        } else if(chosenFigure.equals("kolo")) {
+            System.out.println("Podaj promien");
+            BigDecimal r = scanner.nextBigDecimal();
+            figure = new Circle(r);
+        } else if(chosenFigure.equals("kwadrat")) {
             System.out.println("Podaj bok");
-            double w = scanner.nextDouble();
-            figure = new Triangle(w, h);
+            BigDecimal w = scanner.nextBigDecimal();
+            figure = new Square(w);
         } else {
             System.out.println("Nie znam tej figury, koniec!");
             return;
         }
+        //zaokraglone do 2 miejsc po przecinku
         System.out.println("Pole to: ");
-        System.out.println(figure.calculateArea());
+        System.out.println(figure.calculateArea().setScale(2, RoundingMode.UP));
+        System.out.println("Obwod to: ");
+        System.out.println(figure.calculatePerimeter().setScale(2, RoundingMode.UP));
     }
 }
